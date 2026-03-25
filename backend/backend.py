@@ -3,6 +3,12 @@ from pydantic import BaseModel
 import requests
 import os
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+# =========================
+# LOAD ENV
+# =========================
+load_dotenv()
 
 # =========================
 # APP SETUP
@@ -24,33 +30,46 @@ class ChatRequest(BaseModel):
     message: str
 
 # =========================
-# AI FUNCTION (OPENROUTER)
+# API KEY
 # =========================
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
+# =========================
+# AI FUNCTION
+# =========================
 def query_ai(prompt):
     try:
+        if not OPENROUTER_API_KEY:
+            return "ERROR: API key not found. Check Render ENV."
+
         response = requests.post(
             "https://openrouter.ai/api/v1/chat/completions",
             headers={
                 "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "HTTP-Referer": "https://your-app.onrender.com",  # optional but recommended
+                "X-Title": "AI Career Counselor"
             },
             json={
-               "model": "openchat/openchat-7b:free",
+                "model": "openai/gpt-3.5-turbo",
                 "messages": [
+                    {"role": "system", "content": "You are a helpful career counselor."},
                     {"role": "user", "content": prompt}
                 ]
-            }
+            },
+            timeout=30
         )
 
         data = response.json()
         print("API RESPONSE:", data)
 
+        if response.status_code != 200:
+            return f"API Error ({response.status_code}): {data}"
+
         if "choices" in data:
             return data["choices"][0]["message"]["content"]
 
-        return "AI error: " + str(data)
+        return "Unexpected AI response: " + str(data)
 
     except Exception as e:
         print("ERROR:", e)
@@ -61,8 +80,6 @@ def query_ai(prompt):
 # =========================
 def get_response(user_input):
     prompt = f"""
-You are an AI career counselor.
-
 Give short, clear, and helpful career advice.
 
 User Question:
