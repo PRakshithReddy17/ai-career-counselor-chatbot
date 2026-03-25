@@ -37,7 +37,7 @@ def query_ai(prompt):
                 "Content-Type": "application/json"
             },
             json={
-                "model": "mistralai/mistral-7b-instruct:free",
+               "model": "openchat/openchat-7b:free",
                 "messages": [
                     {"role": "user", "content": prompt}
                 ]
