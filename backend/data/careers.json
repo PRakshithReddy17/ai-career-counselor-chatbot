@@ -1,0 +1,92 @@
+[
+    {
+      "career": "Engineering",
+      "description": "Focus on designing, building, and improving machines, software, and infrastructure.",
+      "skills": ["Maths", "Problem Solving", "Logical Thinking"],
+      "paths": ["B.Tech", "Diploma"],
+      "jobs": ["Software Engineer", "Civil Engineer", "Mechanical Engineer"],
+      "colleges": ["IIT", "NIT", "State Engineering Colleges", "Polytechnic Colleges"],
+      "exams": ["JEE Main", "JEE Advanced", "State Entrance Exams"]
+    },
+    {
+      "career": "Healthcare",
+      "description": "Work in medical and healthcare services helping people stay healthy.",
+      "skills": ["Biology", "Care", "Communication"],
+      "paths": ["MBBS", "Nursing", "B.Pharmacy"],
+      "jobs": ["Doctor", "Nurse", "Pharmacist"],
+      "colleges": ["AIIMS", "Government Medical Colleges", "Private Medical Colleges"],
+      "exams": ["NEET"]
+    },
+    {
+      "career": "Arts and Creative Fields",
+      "description": "Creative careers in design, writing, media, and performing arts.",
+      "skills": ["Creativity", "Communication", "Imagination"],
+      "paths": ["BA", "Design Courses", "Fine Arts"],
+      "jobs": ["Graphic Designer", "Writer", "Photographer", "Content Creator"],
+      "colleges": ["NIFT", "Fine Arts Colleges", "Media Institutes"],
+      "exams": ["NIFT Entrance", "CUET"]
+    },
+    {
+      "career": "Government Jobs",
+      "description": "Secure jobs in public sector through competitive exams.",
+      "skills": ["General Knowledge", "Reasoning", "Discipline"],
+      "paths": ["Graduation in any field"],
+      "jobs": ["IAS", "Police Officer", "Clerk", "Bank Officer"],
+      "colleges": ["Any recognized university"],
+      "exams": ["UPSC", "SSC", "Bank Exams", "Railway Exams"]
+    },
+    {
+      "career": "Business and Entrepreneurship",
+      "description": "Start and manage businesses or work in corporate management.",
+      "skills": ["Leadership", "Communication", "Decision Making"],
+      "paths": ["BBA", "MBA", "Startup"],
+      "jobs": ["Business Owner", "Manager", "Entrepreneur"],
+      "colleges": ["IIM", "Business Schools"],
+      "exams": ["CAT", "GMAT"]
+    },
+    {
+      "career": "Information Technology",
+      "description": "Work with computers, software, and digital technologies.",
+      "skills": ["Programming", "Problem Solving", "Logical Thinking"],
+      "paths": ["B.Tech CSE", "BCA", "Online Courses"],
+      "jobs": ["Software Developer", "Data Analyst", "Cybersecurity Analyst"],
+      "colleges": ["Engineering Colleges", "Online Platforms"],
+      "exams": ["JEE", "University Entrance Exams"]
+    },
+    {
+      "career": "Education and Teaching",
+      "description": "Teach students and help in education development.",
+      "skills": ["Communication", "Patience", "Subject Knowledge"],
+      "paths": ["B.Ed", "Graduation + Teaching Training"],
+      "jobs": ["Teacher", "Professor", "Tutor"],
+      "colleges": ["Teacher Training Institutes"],
+      "exams": ["TET", "CTET"]
+    },
+    {
+      "career": "Agriculture",
+      "description": "Work in farming, agribusiness, and agricultural science.",
+      "skills": ["Farming Knowledge", "Management", "Practical Skills"],
+      "paths": ["BSc Agriculture", "Diploma"],
+      "jobs": ["Farmer", "Agricultural Officer", "Agri-Entrepreneur"],
+      "colleges": ["Agricultural Universities"],
+      "exams": ["ICAR Entrance"]
+    },
+    {
+      "career": "Law",
+      "description": "Work in legal systems, courts, and advisory roles.",
+      "skills": ["Argumentation", "Reading", "Critical Thinking"],
+      "paths": ["LLB", "BA LLB"],
+      "jobs": ["Lawyer", "Judge", "Legal Advisor"],
+      "colleges": ["National Law Universities"],
+      "exams": ["CLAT"]
+    },
+    {
+      "career": "Skilled Trades",
+      "description": "Hands-on careers like electrician, plumber, mechanic.",
+      "skills": ["Technical Skills", "Practical Knowledge"],
+      "paths": ["ITI", "Diploma"],
+      "jobs": ["Electrician", "Mechanic", "Technician"],
+      "colleges": ["ITI Institutes"],
+      "exams": ["ITI Entrance"]
+    }
+  ]
