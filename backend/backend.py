@@ -1,19 +1,14 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import requests
 import os
-from dotenv import load_dotenv
-from rag import search
+from fastapi.middleware.cors import CORSMiddleware
 
-# Load environment variables
-load_dotenv()
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
+# =========================
+# APP SETUP
+# =========================
 app = FastAPI()
 
-# Allow frontend access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -22,11 +17,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# =========================
+# REQUEST MODEL
+# =========================
 class ChatRequest(BaseModel):
     message: str
 
+# =========================
+# AI FUNCTION (OPENROUTER)
+# =========================
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-# 🔥 OPENROUTER AI FUNCTION
 def query_ai(prompt):
     try:
         response = requests.post(
@@ -36,60 +37,46 @@ def query_ai(prompt):
                 "Content-Type": "application/json"
             },
             json={
-                "model": "openrouter/auto",
+                "model": "mistralai/mistral-7b-instruct:free",
                 "messages": [
-                    {"role": "system", "content": "You are a helpful career counselor."},
                     {"role": "user", "content": prompt}
-                ],
-                "temperature": 0.7,
-                "max_tokens": 300
-            },
-            timeout=30
+                ]
+            }
         )
 
-        result = response.json()
-        print("AI RESPONSE:", result)
+        data = response.json()
+        print("API RESPONSE:", data)
 
-        # ✅ Success
-        if "choices" in result:
-            return result["choices"][0]["message"]["content"]
+        if "choices" in data:
+            return data["choices"][0]["message"]["content"]
 
-        # ❌ Error case
-        if "error" in result:
-            return f"API Error: {result['error'].get('message', 'Unknown error')}"
-
-        return "Unexpected response from AI."
+        return "AI error: " + str(data)
 
     except Exception as e:
         print("ERROR:", e)
         return "Error connecting to AI service."
 
-
-# 🔥 MAIN LOGIC
+# =========================
+# MAIN LOGIC
+# =========================
 def get_response(user_input):
-    try:
-        context = search(user_input)
-
-        prompt = f"""
+    prompt = f"""
 You are an AI career counselor.
 
 Give short, clear, and helpful career advice.
 
-Career Data:
-{context}
-
 User Question:
 {user_input}
 """
+    return query_ai(prompt)
 
-        return query_ai(prompt)
+# =========================
+# ROUTES
+# =========================
+@app.get("/")
+def root():
+    return {"message": "AI Career Counselor Backend is running 🚀"}
 
-    except Exception as e:
-        print("MAIN ERROR:", e)
-        return "Something went wrong."
-
-
-# 🔥 API ROUTE
 @app.post("/chat")
 def chat(request: ChatRequest):
     return {"reply": get_response(request.message)}
