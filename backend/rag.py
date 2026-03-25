@@ -17,4 +17,4 @@ def search(query):
         if query in career["title"].lower():
             return career["description"]
 
-    return "Focus on your interests, build skills, and stay consistent in your career path."
+    return "Focus on your interests, build skills, and stay consistent."
