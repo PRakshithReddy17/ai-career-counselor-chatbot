@@ -1,24 +1,16 @@
 import json
-from sentence_transformers import SentenceTransformer
-import faiss
 
-# Load model
-model = SentenceTransformer('all-MiniLM-L6-v2')
+def load_data():
+    with open("backend/data/careers.json", "r", encoding="utf-8") as f:
+        return json.load(f)
 
-# Load data
-with open("data/careers.json") as f:
-    careers = json.load(f)
-
-texts = [c["career"] + " " + c["description"] for c in careers]
-
-# Create embeddings
-embeddings = model.encode(texts)
-
-# Store in FAISS
-index = faiss.IndexFlatL2(len(embeddings[0]))
-index.add(embeddings)
+data = load_data()
 
 def search(query):
-    q_embedding = model.encode([query])
-    _, I = index.search(q_embedding, k=1)
-    return careers[I[0][0]]
+    query = query.lower()
+
+    for career in data:
+        if query in career["title"].lower():
+            return career["description"]
+
+    return "General career advice: Focus on your interests, build skills, and stay consistent."
